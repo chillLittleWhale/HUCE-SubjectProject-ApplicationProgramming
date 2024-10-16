@@ -1,0 +1,24 @@
+<p-dialog [header]="header" [(visible)]="display" [modal]="true" [closable]="false">
+
+
+    <!-- Friend List -->
+    <p-listbox [options]="friendList" [(ngModel)]="selectedFriend" optionLabel="name" [style]="{ width: '100%' }"
+        [multiple]="false"> 
+        <ng-template let-friend pTemplate="item">
+            <div class="friend-item">
+                <img [src]="friend.avatar" alt="{{friend.name}}" class="friend-avatar" />
+                <div class="friend-details">
+                    <div class="friend-name">{{ friend.name }}</div>
+                    <div class="friend-email">{{ friend.email }}</div>
+                    <div class="friend-gender">{{ friend.sex }}</div>
+                </div>
+            </div>
+        </ng-template>
+    </p-listbox>
+
+    <!-- Footer with action buttons -->
+    <p-footer>
+        <button type="button" pButton icon="pi pi-check" (click)="onConfirm()" label="Confirm"></button>
+        <button type="button" pButton icon="pi pi-times" (click)="onCancel()" label="Cancel"></button>
+    </p-footer>
+</p-dialog>

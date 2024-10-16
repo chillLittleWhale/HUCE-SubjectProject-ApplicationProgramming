@@ -1,0 +1,108 @@
+<section class="chat-section">
+  <div class="chat-container">
+    <aside class="chat-sidebar">
+      <a href="#" class="chat-sidebar-logo">
+        <i class="ri-chat-1-fill"></i>
+      </a>
+      <ul class="chat-sidebar-menu">
+        <li><a [routerLink]="['/home', userIdNumber]" data-title="Chats"><i class="ri-chat-3-line"></i></a></li>
+        <li class="active"><a data-title="Follow"><i class="ri-group-line"></i></a></li>
+        <li><a [routerLink]="['/profile', userIdNumber]" data-title="Profile"><i class="ri-folder-user-line"></i></a>
+        </li>
+        <li><a href="#" data-title="Settings"><i class="ri-settings-line"></i></a></li>
+      </ul>
+    </aside>
+
+    <div class="content-container">
+      <div class="search">
+        <div [formGroup]="searchForm" class="search-bar">
+          <input class="search-bar-i" formControlName="email" type="text" placeholder="Tìm kiếm...">
+          <button type="button" (click)="onSearch()"><i class="ri-search-line"></i></button>
+        </div>
+        <div class="search-result" *ngIf="searchForm.controls['email'].value">
+          <ul>
+            <li *ngIf="searchedUser">
+              <div class="search-result-item">
+                <img src="{{searchedUser.avatar}}" alt="Avatar" class="avatar">
+                <div class="search-result-item-info">
+                  <div class="name-and-gender">
+                    <h3>{{searchedUser.name}}</h3>
+                    <img *ngIf="searchedUser.sex.toString() == 'MALE'" src='../../../assets/pic/gender-male-96.png'
+                      alt="Unknow" class="icon-image">
+                    <img *ngIf="searchedUser.sex.toString() == 'FEMALE'" src='../../../assets/pic/gender-female-96.png'
+                      alt="Unknow" class="icon-image">
+                    <img *ngIf="searchedUser.sex.toString() == 'UNKNOW'" src='../../../assets/pic/gender-unknow-96.png'
+                      alt="Unknow" class="icon-image">
+                  </div>
+                  <p>{{searchedUser.email}}</p>
+                </div>
+                <!-- <div>
+                  <img src='../../../assets/pic/gender-unknow-96.png' alt="Unknow" class="icon-image">
+                </div> -->
+                <button *ngIf="!isUserInFollingList(searchedUser)" (click)="onFollow(searchedUser.id)"><i
+                    class="ri-heart-add-line"></i> Follow</button>
+                <button *ngIf="isUserInFollingList(searchedUser)" (click)="onUnFollow(searchedUser.id)"><i
+                    class="ri-delete-bin-2-line"></i> Unfollow</button>
+              </div>
+            </li>
+            <li *ngIf="searchedUser === null">
+              <p>Không tìm thấy người dùng.</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tables">
+        <div class="table-container">
+          <h2>Following</h2>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Avatar</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of followingList">
+                <td><img src="{{user.avatar}}" alt="Avatar" class="avatar"></td>
+                <td>{{user.name}}</td>
+                <td>{{user.email}}</td>
+                <td><button (click)="onUnFollow(user.id)"><i class="ri-delete-bin-2-line"></i></button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="table-container">
+          <h2>Follower</h2>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Avatar</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of followerList">
+                <td><img src="{{user.avatar}}" alt="Avatar" class="avatar"></td>
+                <td>{{user.name}}</td>
+                <td>{{user.email}}</td>
+                <td *ngIf="isUserInBothLists(user)">
+                  <a>Followed</a>
+                </td>
+                <td *ngIf="!isUserInBothLists(user)">
+                  <button (click)="onFollow(user.id)"><i class="ri-heart-add-line"></i> <a>Theo dõi</a></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

@@ -1,0 +1,36 @@
+<p-dialog [header]="header" [(visible)]="display" [modal]="true" [closable]="false">
+    <div [formGroup]="form" class="column gap-1 form-wrapper">
+        <!-- Name -->
+        <div class="row gap-05">
+            <span class="price-label">Name : </span>
+            <input type="text" formControlName="name" />
+        </div>
+
+        <!-- Avatar -->
+        <div class="row gap-05">
+            <span class="price-label">Avatar: </span>
+            <input type="text" formControlName="avatar" />
+        </div>
+    </div>
+
+    <!-- Friend List -->
+    <p-listbox [options]="friendList" [(ngModel)]="selectedFriendList" optionLabel="name" [style]="{ width: '100%' }"
+        [multiple]="true">
+        <ng-template let-friend pTemplate="item">
+            <div class="friend-item">
+                <img [src]="friend.avatar" alt="{{friend.name}}" class="friend-avatar" />
+                <div class="friend-details">
+                    <div class="friend-name">{{ friend.name }}</div>
+                    <div class="friend-email">{{ friend.email }}</div>
+                    <div class="friend-gender">{{ friend.sex }}</div>
+                </div>
+            </div>
+        </ng-template>
+    </p-listbox>
+
+    <!-- Footer with action buttons -->
+    <p-footer>
+        <button type="button" pButton icon="pi pi-check" (click)="onConfirm()" label="Confirm"></button>
+        <button type="button" pButton icon="pi pi-times" (click)="onCancel()" label="Cancel"></button>
+    </p-footer>
+</p-dialog>

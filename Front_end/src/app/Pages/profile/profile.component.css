@@ -1,0 +1,290 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+
+
+/* start: Globals */
+*, ::before, ::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font: inherit;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--slate-700);
+}
+/* end: Globals */
+
+
+
+/* start: Chat */
+.chat-section {
+    box-shadow: inset 0 160px 0 0 var(--emerald-500);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--slate-100);
+}
+.chat-container {
+    max-width: 1500px;
+    width: 100%;
+    height: 720px;
+    box-shadow: 0 8px 24px -4px rgba(0, 0, 0, .1);
+    background-color: var(--white);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+.chat-container[_ngcontent-ng-c2866393169] {
+  padding-left: 84px;
+}
+/* .table-container[_ngcontent-ng-c2866393169] {
+  padding-left: 0px;
+}
+.table[_ngcontent-ng-c2866393169] {
+  margin-left: 0px;
+} */
+/* end: Chat */
+
+
+
+/* start: Sidebar */
+.chat-sidebar {
+    width: 64px;
+    background-color: var(--slate-100);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 50;
+}
+.chat-sidebar-logo {
+    font-size: 28px;
+    color: var(--emerald-600);
+    display: block;
+    text-align: center;
+    padding: 12px 8px;
+    text-decoration: none;
+}
+.chat-sidebar-menu {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 16px 0;
+}
+.chat-sidebar-menu > * > a {
+    display: block;
+    text-align: center;
+    padding: 12px 8px;
+    font-size: 24px;
+    text-decoration: none;
+    color: var(--slate-400);
+    position: relative;
+    transition: color .15s ease-in-out;
+}
+.chat-sidebar-menu > * > a:hover {
+    color: var(--slate-600);
+}
+.chat-sidebar-menu > .active > a {
+    box-shadow: inset 4px 0 0 0 var(--emerald-500);
+    color: var(--emerald-600);
+    background-color: var(--emerald-100);
+}
+.chat-sidebar-menu > * > a::before {
+    content: attr(data-title);
+    position: absolute;
+    top: 50%;
+    left: calc(100% - 16px);
+    border-radius: 4px;
+    transform: translateY(-50%);
+    font-size: 13px;
+    padding: 6px 12px;
+    background-color: rgba(0, 0, 0, .6);
+    color: var(--white);
+    opacity: 0;
+    visibility: hidden;
+    transition: all .15s ease-in-out;
+}
+.chat-sidebar-menu > * > a:hover::before {
+    left: calc(100% - 8px);
+    opacity: 1;
+    visibility: visible;
+}
+.chat-sidebar-profile-toggle {
+  background-color: transparent;
+  border: none;
+  outline: transparent;
+  width: 40px;
+  height: 40px;
+  margin: 0 auto;
+  display: block;
+  cursor: pointer;
+}
+.chat-sidebar-profile-toggle > img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+/* end: Sidebar */
+.table-container {
+  flex: 1;
+  padding-left: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  margin: 10px;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-left: 20px;
+}
+
+.table th,
+.table td {
+  border: 1px solid var(--slate-300);
+  padding: 8px;
+}
+
+.table th {
+  background-color: var(--emerald-500);
+  color: var(--white);
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 100%;
+  margin-left: 5%;
+}
+
+/* Additional styles for profile and settings */
+.profile-container {
+  /* display: flex; */
+  align-items: center;
+  margin-top: 20%;
+  margin-bottom: 20%;
+  margin-left: 10%;
+  margin-right: 5%;
+}
+
+.profile-image {
+    display: flex;
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    align-items: center; /* Căn giữa theo chiều dọc, nếu cần */
+    /* height: 20%; Đảm bảo rằng phần tử cha có chiều cao nhất định */
+  }
+.profile-image img {
+  /* border-radius: 50%; */
+  width: 150px;
+  height: 150px;
+  /* margin-left: 25%; */
+  /* object-fit: cover; */
+}
+
+.profile-info {
+  /* margin-left: 20px; */
+}
+
+.profile-info h2 {
+  font-size: 1.5em;
+  margin-bottom: 5px;
+  display: flex; /* Sử dụng flexbox để căn giữa nội dung */
+  align-items: center; /* Căn giữa theo chiều ngang */
+  justify-content: center; /* Căn giữa theo chiều dọc */
+
+  padding: 2px; /* Thêm khoảng cách giữa border và nội dung */
+  box-sizing: border-box; /* Đảm bảo padding không ảnh hưởng đến kích thước tổng thể */
+
+}
+
+.profile-info p {
+  font-size: 0.9em;
+  color: var(--slate-400);  display: flex; /* Sử dụng flexbox để căn giữa nội dung */
+  align-items: center; /* Căn giữa theo chiều ngang */
+  justify-content: center; /* Căn giữa theo chiều dọc */
+
+  padding: 2px; /* Thêm khoảng cách giữa border và nội dung */
+  box-sizing: border-box; /* Đảm bảo padding không ảnh hưởng đến kích thước tổng thể */
+}
+
+.profile-info .update-image {
+  background-color: var(--emerald-500);
+  color: var(--white);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-left: 15%;
+  transition: background-color 0.3s ease;
+}
+
+.profile-info .update-image:hover {
+  background-color: var(--emerald-600);
+}
+
+.settings-container {
+  width: 100%;
+  margin-left: 10%;
+  margin-top: 10%;
+  padding-right: 5%;
+}
+
+.settings-container h2 {
+  font-size: 1.2em;
+  margin-bottom: 15px;
+  font-weight: bold;
+  color: var(--emerald-500);
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input, .form-group select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--slate-300);
+  border-radius: 4px;
+  font-size: 1em;
+}
+
+.form-group input[type="password"], .form-group input[type="email"] {
+  font-family: 'Inter', sans-serif;
+}
+
+.update-settings {
+  width: 100%;
+  background-color: var(--emerald-500);
+  color: var(--white);
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.update-settings:hover {
+  background-color: var(--emerald-600);
+}
+

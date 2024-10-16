@@ -1,0 +1,155 @@
+<!-- start: Chat -->
+<section class="chat-section">
+    <div class="chat-container">
+        <!-- start: Sidebar -->
+        <aside class="chat-sidebar">
+            <a href="#" class="chat-sidebar-logo">
+                <i class="ri-chat-1-fill"></i>
+            </a>
+            <ul class="chat-sidebar-menu">
+                <li class="active"><a data-title="Chats"><i class="ri-chat-3-line"></i></a></li>
+                <li><a [routerLink]="['/follow', userIdNumber]" data-title="Follow"><i class="ri-group-line"></i></a></li>
+                <li><a [routerLink]="['/profile', userIdNumber]" data-title="Profile" (click)="ngOnDestroy()"><i class="ri-folder-user-line"></i></a></li>
+                <li><a href="#" data-title="Settings"  (click)="ngOnDestroy()"><i class="ri-settings-line"></i></a></li>
+                <li class="chat-sidebar-profile">
+                    <button type="button" class="chat-sidebar-profile-toggle">
+                        <img [src]="mySelf && mySelf.avatar ? mySelf.avatar : '../../../assets/pic/avatar-unknown-90.png'" alt="Your avatar">
+                    </button>
+                    <ul class="chat-sidebar-profile-dropdown">
+                        <li><a href="#"><i class="ri-user-line"></i> Profile</a></li>
+                        <li><a href="#"><i class="ri-logout-box-line"></i> Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </aside>
+        <!-- end: Sidebar -->
+
+        <!-- start: Content -->
+        <div class="chat-content">
+            <!-- start: Content side -->
+            <div class="content-sidebar">
+                <div class="conversation-top">
+                    <div class="content-sidebar-title">Chats</div>
+                    <div class="conversation-buttons">
+                        <button type="button" (click)="showNomalConverPopup()"><img src="../../../assets/pic/add-private-chat-48.png" alt="Tạo chat 1v1" class="icon-image"></button>
+                        <button type="button" (click)="showGroupConverPopup()"><img src="../../../assets/pic/add-group-chat-48.png" alt="Tạo nhóm chat" class="icon-image"></button>
+                    </div>
+                </div>
+                
+                <form action="" class="content-sidebar-form">
+                    <input type="search" class="content-sidebar-input" placeholder="Search...">
+                    <button type="submit" class="content-sidebar-submit"><i class="ri-search-line"></i></button>
+                </form>
+                <div class="content-messages">
+                    <ul class="content-messages-list" *ngFor="let conversation of conversationList" (click)="onConversationSelect(conversation)">
+                        <li>
+                            <a>
+                                <img class="content-message-image"
+                                    [src]="conversation.displayAvatar"
+                                    alt="../../../assets/pic/avatar-unknown-90.png">
+                                <span class="content-message-info">
+                                    <a class="content-message-name">{{conversation.displayName}}</a>
+                                    <div class="conversation-user-status" [ngClass]="{'online': conversation.displayStatus}">{{ conversation.displayStatus ? 'online' : 'offline' }}</div>
+                                </span>
+                                <span class="content-message-more">
+                                    <span class="content-message-unread">5</span>
+                                    <span class="content-message-time">12:30</span>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- end: Content side -->
+
+            <!-- start: Conversation -->
+            <div class="conversation conversation-default" [ngClass]="{'active': !selectedConversation}"> 
+                <i class="ri-chat-3-line"></i>
+                <p>Select chat and view conversation!</p>
+            </div>
+
+            <div class="conversation " id="conversation-1" [ngClass]="{'active': selectedConversation}"> 
+                <div class="conversation-top">
+                    <button type="button" class="conversation-back"><i class="ri-arrow-left-line"></i></button>
+                    <div class="conversation-user">
+                        <img class="conversation-user-image"
+                            src= {{selectedConverAvatar}}
+                            alt="">
+                        <div>
+                            <div class="conversation-user-name">
+                                <span *ngIf="!selectedConversation">chưa select conversation</span> 
+                                <span *ngIf="selectedConversation">{{selectedConverName}}</span> 
+                            </div>
+                            <!-- <div class="conversation-user-status online">online</div> -->
+                        </div>
+                    </div>
+                    <div class="conversation-buttons">
+                        <button type="button"><i class="ri-phone-fill"></i></button>
+                        <button type="button"><i class="ri-vidicon-line"></i></button>
+                        <button type="button"><i class="ri-information-line"></i></button>
+                    </div>
+                </div>
+
+                <div class="conversation-main">
+                    <ul class="conversation-wrapper" *ngFor="let message of messageList">
+                        <li class="conversation-item" [ngClass]="{'notme': mySelf && message.senderId !== mySelf.id}">
+                            <div class="conversation-item-side">
+                                <img class="conversation-item-image"
+                                    src= {{message.senderAvatar}}
+                                    alt= '../../../assets/pic/avatar-unknown-90.png'>
+                            </div>
+                            <div class="conversation-item-content">
+                                <div class="conversation-item-wrapper">
+                                    <div class="conversation-item-box">
+                                        <div class="conversation-item-text">
+                                            <p>{{message.content}}</p>
+                                            <div class="conversation-item-time"> {{ message.timeStamp | date: 'HH:mm dd/MM/yyyy'}} </div>
+                                        </div>
+                                        <div class="conversation-item-dropdown">
+                                            <button type="button" class="conversation-item-dropdown-toggle"><i
+                                                    class="ri-more-2-line"></i></button>
+                                            <ul class="conversation-item-dropdown-list">
+                                                <li><a href="#"><i class="ri-share-forward-line"></i> Forward</a></li>
+                                                <li><a href="#"><i class="ri-delete-bin-line"></i> Delete</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="conversation-form">
+                    <button type="button" class="conversation-form-button"><i class="ri-emotion-line"></i></button>
+                    <div class="conversation-form-group" [formGroup]="messageForm">
+                        <textarea class="conversation-form-input" formControlName="content" rows="1" placeholder="Type here..."></textarea>
+                        <button type="button" class="conversation-form-record"><i class="ri-mic-line"></i></button>
+                    </div>
+                    <button type="button" class="conversation-form-button conversation-form-submit" (click)="onSendMessage()">
+                        <i class="ri-send-plane-2-line"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- end: Conversation -->
+        </div>
+        <!-- end: Content -->
+    </div>
+</section>
+<!-- end: Chat -->
+
+
+<!-- Group conver popup -->
+<app-group-conver-popup
+    [friendList]="friendList"
+    [(display)]="displayGroupConverPopup"
+    (createConversation)="onConfirmGroupConver($event)"
+    header="Tạo nhóm chat"
+></app-group-conver-popup>
+
+<!-- Nomal conver popup -->
+<app-nomal-conver-popup
+    [friendList]="friendList"
+    [(display)]="displayNomalConverPopup"
+    (createConversation)="onConfirmNomalConver($event)"
+    header="Tạo đoạn chat"
+></app-nomal-conver-popup>

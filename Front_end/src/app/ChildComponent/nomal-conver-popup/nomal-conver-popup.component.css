@@ -1,0 +1,44 @@
+.friend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .friend-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+  
+  .friend-details {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .friend-name {
+    font-weight: bold;
+  }
+  
+  .friend-email,
+  .friend-gender {
+    font-size: 0.9em;
+    color: gray;
+  }
+
+  
+  .icon-image {
+      width: 24px; /* Hoặc kích thước bạn muốn */
+      height: 24px; /* Hoặc kích thước bạn muốn */
+  }
+  
+  .form-wrapper .row span {
+    flex: 1;
+  }
+  
+  .form-wrapper .row input {
+    flex: 3;
+  }
+  
+
+  
+  

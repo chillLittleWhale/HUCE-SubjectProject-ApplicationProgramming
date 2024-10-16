@@ -1,0 +1,56 @@
+<section class="chat-section">
+    <div class="chat-container">
+        <aside class="chat-sidebar">
+            <a href="#" class="chat-sidebar-logo">
+                <i class="ri-chat-1-fill"></i>
+            </a>
+            <ul class="chat-sidebar-menu">
+                <li><a [routerLink]="['/home', userIdNumber]" data-title="Chats"><i class="ri-chat-3-line"></i></a></li>
+                <li><a [routerLink]="['/follow', userIdNumber]" data-title="Follow"><i class="ri-group-line"></i></a>
+                </li>
+                <li class="active"><a data-title="Profile"><i class="ri-folder-user-line"></i></a></li>
+                <li><a href="#" data-title="Settings"><i class="ri-settings-line"></i></a></li>
+            </ul>
+        </aside>
+        <div class="container" [formGroup]="informationForm">
+            <div class="profile-container">
+                <div class="profile-image">
+                    <!-- <img [src]="mySelf.avatar" alt="Profile Image" /> -->
+                    <img [src]="this.selectedAvatarUrl" alt="Profile Image" />
+                </div>
+                <div class="profile-info">
+                    <h2>{{mySelf.name}}</h2>
+                    <p>{{mySelf.email}}</p>
+                </div>
+                <input type="file" class="update-image" (change)="uploadFile($event)">
+
+            </div>
+
+            <div class="settings-container">
+                <h2>Profile Settings</h2>
+                <div class="form-group">
+                    <label for="firstName">Full Name</label>
+                    <input type="text" id="firstName" formControlName="name" placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label for="Sex">Sex</label>
+                    <select id="sex" formControlName="sex">
+                        <option value="MALE">Male</option>
+                        <option value="FEMALE">Female</option>
+                        <option value="UNKNOW">Unknow</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" formControlName="password" placeholder="Enter your password">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" formControlName="email" placeholder="Enter your email">
+                </div>
+                <button class="update-settings" (click)="onUpdateSubmit()">Update</button>
+
+            </div>
+        </div>
+    </div>
+</section>
